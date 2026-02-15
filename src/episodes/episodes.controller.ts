@@ -23,9 +23,13 @@ export class EpisodesController {
         }
 
      @Get(":id") 
-     findOneEpisode(@Param('id') id: string) {
+     async findOneEpisode(@Param('id') id: string) {
         console.log(id)
-        return this.episodesService.findOne(id)
+        const episode= await this.episodesService.findOne(id)
+        if(!episode){
+            throw new Error("Episode Not Found!")
+        }
+        return episode
      }
 
      @Post("create")

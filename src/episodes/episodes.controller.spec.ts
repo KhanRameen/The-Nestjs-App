@@ -38,13 +38,15 @@ describe('EpisodesController', () => {
   });
 
   //test mock service
-  describe('findOneEpisode', ()=>{
-    const episodeId = 'id'
+  describe('findOneEpisode', ()=>{ //describe test scenario
+    //nested scenario for positive and negative outcome.
+    describe('when an episode is found', ()=>{
+       const episodeId = 'id'
     const mockResult = {id: episodeId,name:'my Episode'}
 
     //another test
     beforeEach(()=>{
-      mockFindOne.mockResolvedValue(mockResult)
+      mockFindOne.mockResolvedValue(mockResult) //we mock the return value
     })
 
     it("should call the service with correct params", async () => {
@@ -56,6 +58,22 @@ describe('EpisodesController', () => {
       const result = await controller.findOneEpisode(episodeId)
       expect(result).toEqual(mockResult)
     })
+    })
+
+    //negative scenario 
+    describe("when an episode is not found", ()=> {
+      const episodeId = 'id2'
+       beforeEach(()=>{
+      mockFindOne.mockResolvedValue(null) //mock return value null incase of no episode
+    })
+
+    it("should throw an error", async()=>{
+      await expect (controller.findOneEpisode(episodeId)).rejects.toThrow("Episode Not Found!")//must match the error same as the thrown error on the service
+    })
+
+
+    })
+   
   })
 });
 
