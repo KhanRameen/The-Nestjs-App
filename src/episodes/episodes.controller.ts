@@ -1,29 +1,37 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { EpisodesService } from './episodes.service';
+import { CreateEpisodeDto } from './dto/create-episodes.dto';
+import { ConfigService } from 'src/config/config.service';
 
 @Controller('episodes') //route path "/episodes"
 export class EpisodesController {
-    //you can add methods here to handle requests to this route, such as GET, POST, etc.
+   //to inject service to the controller we add a constructor to the class with a private param with the service type
+   constructor( private episodesService: EpisodesService , private configService: ConfigService) {
+      //this create the instance of service and inject it to the class during runtime
+   }
 
+
+    //you can add methods here to handle requests to this route, such as GET, POST, etc.
      @Get() 
      getAllEpisodes(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
-        return "all episodes"
+        return this.episodesService.findAll(sort)
      }
 
      @Get("Featured")
         getFeaturedEpisodes() {
-            return "featured episodes"
+            return this.episodesService.findFeatured()
         }
 
      @Get(":id") 
-     findOneEpisode(@Param() id: string) {
+     findOneEpisode(@Param('id') id: string) {
         console.log(id)
-        return `Episode: ${id}`
+        return this.episodesService.findOne(id)
      }
 
      @Post("create")
-     createEpisode(@Body() input: any) {
+     createEpisode(@Body() input: CreateEpisodeDto) {
         console.log("input")
-        return `create episode: ${input}`
+        return this.episodesService.create(input)
      }
 }
 
