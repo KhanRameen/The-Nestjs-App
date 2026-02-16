@@ -3,7 +3,7 @@
 </p>
 
 
-*It wasn’t just the logo that attracted me to NestJS, I wanted to learn how to build a structured and scalable backend after experiencing the challenges of poorly designed APIs as a frontend developer*
+*trust me, it wasn’t just the logo that attracted me to NestJS, I actually wanted to learn how to build a structured and scalable backend after experiencing the paing of poorly designed APIs as a frontend developer :)*
 
 **Project**: A simple REST API built with **NestJS** to practice core backend concepts.
 
@@ -16,3 +16,4 @@
 - **Unit Testing** – Testing controllers using mocked services with Jest.
 - **Error Handling** – Using NestJS exceptions to return proper HTTP error responses. 
 - **Pipes** - Validate and transform inputs, runs before the controller
+- **Guards** - Protect routes from unauthorized access
