@@ -1,9 +1,11 @@
-import { Body, Controller, DefaultValuePipe, Get, NotFoundException, Param, ParseIntPipe, Post, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, NotFoundException, Param, ParseIntPipe, Post, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episodes.dto';
 import { ConfigService } from '../config/config.service';
 import { IsPositivePipe } from './pipes/is-positive.pipe';
+import { ApiKeyGuard } from './guards/apit-key-guard';
 
+// @UseGuards(ApiKeyGuard) //apply guard to all routes in the controller
 @Controller('episodes') //route path "/episodes"
 export class EpisodesController {
    //to inject service to the controller we add a constructor to the class with a private param with the service type
@@ -36,6 +38,7 @@ export class EpisodesController {
         return episode
      }
 
+     @UseGuards(ApiKeyGuard) //apply guard to specific route
      @Post("create")
      createEpisode(@Body(ValidationPipe) input: CreateEpisodeDto) {
         console.log("input")
