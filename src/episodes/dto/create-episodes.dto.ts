@@ -1,4 +1,4 @@
-//Data Transfer Object: defines the shape of data being sent between client and server
+//Data Transfer Object: 
 export class CreateEpisodeDto{
     name: string;
     featured?: boolean

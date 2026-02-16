@@ -1,7 +1,8 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, NotFoundException, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episodes.dto';
 import { ConfigService } from '../config/config.service';
+import { IsPositivePipe } from './pipes/is-positive.pipe';
 
 @Controller('episodes') //route path "/episodes"
 export class EpisodesController {
@@ -13,7 +14,10 @@ export class EpisodesController {
 
     //you can add methods here to handle requests to this route, such as GET, POST, etc.
      @Get() 
-     getAllEpisodes(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
+     getAllEpisodes(
+      @Query('sort') sort: 'asc' | 'desc' = 'desc',
+      @Query('limit', new DefaultValuePipe(20), ParseIntPipe, IsPositivePipe) limit:number
+   ) {
         return this.episodesService.findAll(sort)
      }
 
