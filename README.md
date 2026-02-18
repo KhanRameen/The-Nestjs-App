@@ -3,7 +3,7 @@
 </p>
 
 
-*trust me, it wasn’t just the logo that attracted me to NestJS, I actually wanted to learn how to build a structured and scalable backend after experiencing the paing of poorly designed APIs as a frontend developer :)*
+*learning how to build a structured and scalable backend after experiencing the pain of poorly designed APIs as a frontend developer :)*
 
 **Project**: A simple REST API built with **NestJS** to practice core backend concepts.
 
